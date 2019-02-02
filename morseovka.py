@@ -1,7 +1,28 @@
-import sys
-import string
+def decode_morse(message):
+    sep_message = message.split(' ')
+    decode_message = ''
+    for char in sep_message:
+        if char in inverse_morse_alphabet:
+            decode_message += inverse_morse_alphabet[char]
+        elif char == '':
+            continue
+        else:
+            # CNF = Character not found
+            decode_message += '<CNF>'
+    return decode_message
 
-morseAlphabet = {
+
+# encode a message in morse code, spaces between words are represented by '/'
+def encode2morse(message):
+    encoded_message = ""
+    for char in message[:]:
+        if char.upper() in morse_alphabet:
+            encoded_message += morse_alphabet[char.upper()] + " "
+        else:
+            encoded_message += '<CNF>'
+    return encoded_message
+
+morse_alphabet = {
     "A": ".-",
     "B": "-...",
     "C": "-.-.",
@@ -49,33 +70,9 @@ morseAlphabet = {
     "@": ".--.-.",
     "=": "-...-"
 }
+inverse_morse_alphabet = dict((v, k) for (k, v) in morse_alphabet.items())
 
-inverseMorseAlphabet = dict((v, k) for (k, v) in morseAlphabet.items())
-
-testCode = ".... . .-.. .-.. --- / -.. .- .. .-.. -.-- / .--. .-. --- --. .-. .- -- -- . .-. / --. --- --- -.. / .-.. ..- -.-. -.- / --- -. / - .... . / -.-. .... .- .-.. .-.. . -. --. . ... / - --- -.. .- -.--"
-
-# parse a morse code string positionInString is the starting point for decoding
-def decodeMorse(message):
-    messageSeparated = message.split(' ')
-    decodeMessage = ''
-    for char in messageSeparated:
-        if char in inverseMorseAlphabet:
-            decodeMessage += inverseMorseAlphabet[char]
-        else:
-            # CNF = Character not found
-            decodeMessage += '<CNF>'
-    return decodeMessage
-
-
-
-# encode a message in morse code, spaces between words are represented by '/'
-def encodeToMorse(message):
-    encodedMessage = ""
-    for char in message[:]:
-        if char.upper() in morseAlphabet:
-            encodedMessage += morseAlphabet[char.upper()] + " "
-        else:
-            encodedMessage += '<CNF>'
-    return encodedMessage
-
-print(decodeMorse(testCode))
+test_code = 'Toto je testovaci kod. Program vezme tento kod, prelozi ho do morseovky a nasledne ho zpetne desifruje pro kontrolu.'
+print('testovaci kod: ' + test_code)
+print('zakodovana zprava: ' + encode2morse(test_code))
+print('dekodovana zprava: ' + decode_morse(encode2morse(test_code)))
