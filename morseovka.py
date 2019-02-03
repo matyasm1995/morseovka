@@ -1,12 +1,17 @@
 def decode_morse(message):
-    sep_message = message.split(' ')
-    decode_message = ''
+    """
+    funkce pro dekodovani morseovky
+    :param message: textovy retezec pro dekodovani
+    :return: prelozeny kod
+    """
+    sep_message = message.split(' ')  # rozdeleni textoveho retezce do skupin odpovidajicim jednotlivym znakum
+    decode_message = ''  # prazdny retezec pro prelozeny kod
     for char in sep_message:
-        if char in inverse_morse_alphabet:
+        if char in inverse_morse_alphabet:  # vyhledani odpovidajiciho znaku v slovniku
             decode_message += inverse_morse_alphabet[char]
-        elif char == '':
+        elif char == '':  # osetreni vice za sebou jdoucich mezer
             continue
-        else:
+        else:  # pokud nebyl nalezen odpovidajici znak ve slovniku
             # CNF = Character not found
             decode_message += '<CNF>'
     return decode_message
@@ -14,6 +19,11 @@ def decode_morse(message):
 
 # encode a message in morse code, spaces between words are represented by '/'
 def encode2morse(message):
+    """
+    funkce pro zakodovani zpravy do morseovky
+    :param message: textovy retezec pro zakodovani
+    :return: zakodovana zprava
+    """
     encoded_message = ""
     for char in message[:]:
         if char.upper() in morse_alphabet:
@@ -70,7 +80,7 @@ morse_alphabet = {
     "@": ".--.-.",
     "=": "-...-"
 }
-inverse_morse_alphabet = dict((v, k) for (k, v) in morse_alphabet.items())
+inverse_morse_alphabet = dict((v, k) for (k, v) in morse_alphabet.items())  # prehozeni klicu a hodnot
 
 test_code = 'Toto je testovaci kod. Program vezme tento kod, prelozi ho do morseovky a nasledne ho zpetne desifruje pro kontrolu.'
 print('testovaci kod: ' + test_code)
