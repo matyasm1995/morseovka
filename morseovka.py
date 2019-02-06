@@ -8,16 +8,14 @@ def decode_morse(message):
     decode_message = ''  # prazdny retezec pro prelozeny kod
     for char in sep_message:
         if char in inverse_morse_alphabet:  # vyhledani odpovidajiciho znaku v slovniku
-            decode_message += inverse_morse_alphabet[char]
+            decode_message += inverse_morse_alphabet[char]  # pripsani znaku do vystupni zpravy
         elif char == '':  # osetreni vice za sebou jdoucich mezer
             continue
         else:  # pokud nebyl nalezen odpovidajici znak ve slovniku
-            # CNF = Character not found
-            decode_message += '<CNF>'
+            decode_message += '<CNF>'  # CNF = Character not found
     return decode_message
 
 
-# encode a message in morse code, spaces between words are represented by '/'
 def encode2morse(message):
     """
     funkce pro zakodovani zpravy do morseovky
@@ -25,11 +23,11 @@ def encode2morse(message):
     :return: zakodovana zprava
     """
     encoded_message = ""
-    for char in message[:]:
+    for char in message:
         if char.upper() in morse_alphabet:
             encoded_message += morse_alphabet[char.upper()] + " "
         else:
-            encoded_message += '<CNF>'
+            encoded_message += '<CNF>'  # CNF = Character not found
     return encoded_message
 
 morse_alphabet = {
